@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>mem.pe: Local storage text paste sharing over websockets</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="syntax/prettify.js"></script>
+  <script src="code.js"></script>
+  <script type="text/javascript">
+    $(function() { app.run(); });
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <div class="logo"><b>mem.pe</b></div>
+      <ul class="links">
+        <li><span><a href="#">paste</a></span></li>
+        <li><span><a href="#/list">local</a></span></li>
+        <li class="right"><span><a href="#about">about</a></span></li>
+      </ul>
+    </div>
+
+    <div id="panes">
+      <div id="edit">
+        <textarea class="scroll" wrap="off" autofocus="autofocus"></textarea>
+        <button>save</button>
+      </div>
+
+      <div id="code">
+      </div>
+
+      <ul id="list">
+      </ul>
+
+      <div id="message">
+      </div>
+    </div>
+  </div>
+
+  <script id="codeView" type="text/template">
+    <div class="toolbar">
+      <ul class="links">
+        <li><span class="title"><%- m.title() %></span></li>
+        <li class="right"><span class="date"><%= m.created() %></span></li>
+        <li class="right"><span class="separator">|</span></li>
+        <% if ( m.app().ownPaste ) { %>
+          <li class="right"><span class="link remove">del</span></li>
+        <% } else { %>
+          <li class="right"><span class="link fork">fork</span></li>
+        <% } %>
+        <% if ( m.syntax() ) { %>
+          <li class="right"><span class="separator">|</span></li>
+          <li class="right"><span class="link raw">raw view</span></li>
+        <% } %>
+        <li class="right"><span class="separator">|</span></li>
+        <li class="right"><span class="syntax"><small><%= m.syntax() || "text"  %></small></span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <pre></pre>
+    </div>
+  </script>
+
+  <script id="syntaxView" type="text/template">
+    <select>
+      <option value="">no syntax</option>
+      <% for (s in m.app().styles) { %>
+        <option value="<%= s %>" <%= s === m.get('syntax') ? 'selected="selected"' : '' %>><%= m.app().styles[s][0] %></option>
+      <% } %>
+    </select>
+  </script>
+
+  <script id="pasteListView" type="text/template">
+    <strong>
+      <small><%= m.syntax() || "text" %></small>
+      <span class="navigate"><%- m.title(20) %></span>
+      <span class="remove">&#x2716;</span>
+    </strong>
+    <div class="navigate">
+      <pre class="scroll"></pre>
+    </div>
+  </script>
+
+  <script id="error_REMOTE_NOT_FOUND" type="text/template">
+    <p><strong>Error - Not Found On Remote</strong><p>
+    The paste was not found in the remote client's browser. Some of the possible reasons for this to happen are:
+    <ul>
+      <li>You are accessing the wrong URL. Please contact the owner of this paste and get the correct one.</li>
+      <li>The owner of this paste has deleted it from their browser.</li>
+      <li>There was a technical problem with the other client's browser.</li>
+    </ul>
+  </script>
+
+  <script id="error_LOCAL_NOT_FOUND" type="text/template">
+    <p><strong>Error - Not Found Here</strong><p>
+    The paste was not found in your browser's database.
+    Some of the possible reasons for this to happen are:
+    <ul>
+      <li>You have deleted the paste from your browser.</li>
+      <li>You saved this paste on your other computer, or in your other browser.</li>
+      <li>You have cleared your browser's cookies and data.</li>
+    </ul>
+  </script>
+
+  <script id="error_NOT_CONNECTED" type="text/template">
+    <p><strong>Error 410 - Gone</strong><p>
+    The client who owns this paste has diconnected. They might have closed their browser, or just the tab with mem.pe.
+    Please contact the person who sent you this link and ask them to log on to http://mem.pe. Once they do, you will
+    be able to access this page again.
+  </script>
+
+  <script id="info_NO_PASTES" type="text/template">
+    You don't have any pastes saved in this browser. <a href="#">Paste</a> something now.
+  </script>
+
+  <script id="page_ABOUT" type="text/template">
+    <h2>Code pastes, saved in local storage and shared via websockets</h2>
+    <p>
+      If you <a href="#">paste some text</a>, it is saved in your browser's local storage.
+      You can send the URL of your paste to anyone, and they will be able to to see it.
+      Viewers will connect to your browser via a websocket, and will be able to access your paste
+      for as long as you are connected to this website.
+    </p>
+    <p>
+      In order for people to see your paste, you will have to keep your browser open and logged on to this
+      web site. If you leave this website, the paste viewers will see a "disconnected" message instead.
+    </p>
+    <p>
+      <h3>Advantages:</h3>
+      <ul>
+        <li>
+          <b>Ownership.</b> There is no server side database, so nothing will be stored on the server.
+          You are in posession of all code pastes.
+        </li>
+        <li>
+          <b>(<i>Un</i>)availability.</b> Once you leave this site, it will be impossible for anyone to see your
+          code paste, even if they have its URL.
+        </li>
+        <li>
+          <b>Privacy.</b> Search engines won't be able to index and share your pastes.
+        </li>
+      </ul>
+    </p>
+    <p>
+      This site uses HTML5, so if you're using an old browser, you won't be able to see this message.
+    </p>
+  </script>
+</body>
+</html>
+

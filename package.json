@@ -1,0 +1,14 @@
+{
+    "name": "mem.pe",
+    "description": "Local storage code pastes, shared via websockets",
+    "version": "0.0.1",
+    "author": "Stefan G. <stefanguen@gmail.com>",
+    "private": true,
+    "dependencies": {
+        "websocket": "*"
+    },
+    "devDependencies": {
+      "less": "*",
+      "uglify-js": "*"
+    }
+}

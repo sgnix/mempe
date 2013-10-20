@@ -1,0 +1,292 @@
+@blue: #e5ecf9;
+@green: #060;
+@headerHeight: 30px;
+@width: 945px;
+
+.center {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.round-corner (@px) {
+  border-radius: @px;
+  -moz-border-radius: @px;
+}
+
+body {
+  margin:0;
+  padding:0;
+  line-height:1.5;
+  background:white;
+  font-size:85%;
+  color:#222;
+  background:#fff;
+  font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+pre, .code {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-size: 12px;
+}
+
+.hide {
+  display: none;
+}
+
+.right {
+  float: right !important;
+}
+
+textarea:focus, input:focus {
+  outline: 0;
+}
+
+#header {
+  background: #2B2A2B;
+  color: #eee;
+  border-bottom: 3px solid @blue;
+  height: @headerHeight;
+  a {
+    color: #a0a0a0;
+    text-decoration: none;
+    text-shadow: 1px 1px #000;
+    &:hover {
+      color: #ccc;
+    }
+  }
+
+  .logo {
+    float: left;
+    height: @headerHeight;
+    cursor: pointer;
+    background: @green;
+    padding: 0 7px;
+    margin-right: 7px;
+    display: table;
+    text-shadow: 1px 1px #000;
+    b {
+      .center;
+    }
+  }
+
+  li {
+    padding: 0 3px;
+  }
+
+  .border {
+    border-right: 1px solid #555;
+  }
+}
+
+#container {
+  width: @width;
+  margin: 0 auto;
+}
+
+#panes {
+  //padding: 4px;
+}
+
+button.yes, button.cancel {
+  border: 1px solid #999;
+  .round-corner(4px);
+  &:hover {
+    box-shadow: 0px 0px 2px #159;
+  }
+}
+
+button.yes {
+  background-color: #fcc;
+}
+
+
+// Header links and others
+ul.links {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  li {
+    float: left;
+    display: table;
+    height: @headerHeight;
+    text-overflow: ellipsis;
+
+    span {
+        .center;
+        padding: 0 3px;
+    }
+  }
+}
+
+// Boxes of code pastes in #/list
+ul#list {
+  padding: 10px 0;
+  margin: 0;
+  list-style-type: none;
+
+  // box
+  li.box {
+    width: 295px;
+    max-height: 200px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 15px;
+    padding: 3px;
+    border: 1px dashed #ccc;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #aaa;
+    }
+
+    pre {
+      line-height: 1.1;
+    }
+  }
+
+  // title
+  strong {
+    background: @blue;
+    .round-corner(5px);
+    display: block;
+    height: 23px;
+    overflow: hidden;
+    text-align: center;
+    padding: 3px 3px;
+    margin-bottom: 3px;
+    color: #555;
+    text-shadow: 1px 1px #fff;
+
+    small {
+      float: left;
+      font-variant: small-caps;
+      padding: 1px;
+    }
+
+    .remove {
+      position: relative;
+      float: right;
+      margin-right: 5px;
+      color: #aaa;
+
+      &:hover {
+        cursor: pointer;
+        color: #a00;
+      }
+    }
+
+  }
+
+  // containter
+  pre {
+    padding: 3px;
+    margin: 0;
+    height: 100px;
+  }
+
+}
+
+.editable:hover {
+    background: #ffc;
+    cursor: pointer;
+    border: 1px dashed #ccc;
+}
+
+.scroll {
+    overflow: auto;
+}
+.scroll::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+.scroll::-webkit-scrollbar-track {
+	background-color: rgba(113,112,107,0.1);
+	-webkit-border-radius: 5px;
+}
+.scroll::-webkit-scrollbar-thumb:vertical {
+	background-color: rgba(0,0,0,.2);
+	-webkit-border-radius: 6px;
+}
+.scroll::-webkit-scrollbar-thumb:vertical:hover,
+.scroll::-webkit-scrollbar-thumb:horizontal:hover {
+	background-color: rgba(0,0,0,.3);
+}
+.scroll::-webkit-scrollbar-thumb:horizontal {
+	background-color: rgba(0,0,0,.2);
+	-webkit-border-radius: 6px;
+}
+
+#edit {
+  textarea {
+    border: 1px solid #aaa;
+    background: #ffe;
+    margin-bottom: 0;
+    width: 99%;
+    height: 250px;
+    clear: both;
+  }
+  button {
+    font-size: 120%;
+    font-weight: bold;
+  }
+}
+
+// code toolbar
+.toolbar {
+  //border-bottom: 1px solid #eee;
+  padding: 3px 0;
+  height: @headerHeight;
+  border-bottom: 1px solid #ccc;
+
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 3px;
+
+    input {
+      border: 1px solid #ddd;
+      padding: 1px 2px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  .date {
+    color: #888;
+    font-size: .9em;
+  }
+
+  .link {
+    color: #00c;
+    cursor: pointer;
+    font-variant: small-caps;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .remove {
+    color: #600;
+  }
+
+  .separator {
+    color: #ccc;
+  }
+
+  // The syntax pill
+  small {
+    @color: @blue;
+    .round-corner(8px);
+    font-variant: small-caps;
+    font-size: 1em;
+    border: 1px solid @color;
+    background: @color;
+    color: #333;
+    text-shadow: 1px 1px #fff;
+    padding: 0 3px;
+  }
+
+}
+
