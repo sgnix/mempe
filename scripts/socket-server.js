@@ -10,24 +10,6 @@ var Client = (function () {
 
   var callbacks = {};
 
-  function nextName() {
-    var base64 = function (num) {
-      var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var base = alphabet.length;
-
-      var result = "";
-      do {
-        r = num % base;
-        num = Math.floor(num / base);
-        result = alphabet.substr(r, 1) + result;
-      } while (num);
-
-      return result;
-    };
-
-    return base64(new Date().getTime())
-  }
-
   function messageToJSON(message) {
     var json = {};
     if (message.type === "utf8") {
@@ -39,7 +21,6 @@ var Client = (function () {
     }
     return json;
   }
-
 
   function Client(connection) {
 
@@ -68,29 +49,39 @@ var Client = (function () {
   Client.prototype.processMessage = function (action, args) {
     var _this = this;
     switch (action) {
-    case "fetch":
-      var client = clients[args.name];
-      if (typeof client !== "undefined") {
-        client.send("get", { id: args.id }, function (res) {
-          if ( res === null ) {
-            res = { error: "REMOTE_NOT_FOUND" };
-          }
-          _this.send(action, res);
-        });
-      } else {
-        _this.send(action, { error: "NOT_CONNECTED" });
-      }
-      break;
+      case "fetch":
+        var client = clients[args.name];
+        if (typeof client !== "undefined") {
+          client.send("get", { id: args.id }, function (res) {
+            if ( res === null ) {
+              res = { error: "REMOTE_NOT_FOUND" };
+            }
+            _this.send(action, res);
+          });
+        } else {
+          _this.send(action, { error: "NOT_CONNECTED" });
+        }
+        break;
 
-    case "register":
-      if ( typeof args.name !== "string" ) {
-        args.name = nextName();
-      }
-      clients[args.name] = this;
-      _this.send(action, args);
-      break;
+      case "register":
+        var i = 1, name = args.name;
+        while ( clients[name] ) {
+          name = args.name + i++;
+        }
+        this.name = args.name = name;
+        clients[args.name] = this;
+        _this.send(action, args);
+        break;
+
+      case "clients":
+        var names = [];
+        for ( var n in clients ) {
+          names.push(n);
+        }
+        _this.send(action, { names: names });
+        break;
     }
-  };
+  }
 
   Client.prototype.send = function (action, args, callback) {
     var message = JSON.stringify({

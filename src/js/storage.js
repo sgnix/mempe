@@ -51,7 +51,6 @@ app.storage = (function(){
   };
 
   Storage.prototype.get = function(id) {
-    // TODO: make base36
     var idx = find(parseInt(id));
     return idx < 0 ? null : collection[idx];
   }

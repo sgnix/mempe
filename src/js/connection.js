@@ -11,7 +11,7 @@ app.Connection = (function () {
     // webSocket open
     // Register as a client and get a name
     webSocket.onopen = function(){
-      var name = app.identity();
+      var name = app.settings().username;
       _this.send("register", { name: name }, function(res){
         app.identity(res.name);
         onopen && onopen();

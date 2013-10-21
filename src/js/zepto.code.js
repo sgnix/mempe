@@ -9,7 +9,7 @@ $.fn.code = function(model, opts) {
     length: 0
   });
 
-  var spaces = Array(app.tabSpaces + 1).join(" ");
+  var spaces = Array(app.settings().tabsize + 1).join(" ");
 
   var text = model.get('text').replace(/\t/g, spaces);
   var syntax = model.get('syntax');

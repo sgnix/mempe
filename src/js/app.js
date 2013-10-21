@@ -3,9 +3,15 @@ var app = {
   identityKey: 'name',
   storageKey: 'mempes',
   storageIdKey: 'id',
+  settingsKey: 'settings',
   panesEl: '#panes',
   snippetLen: 300,
-  tabSpaces: 2,
+
+  // Default values for the settings
+  settingsDefaults: {
+    username: (Math.floor(new Date().getTime() / 1000)).toString(36),
+    tabsize: 2
+  },
 
   styles: {
     c       : ["c/c++", null],
@@ -63,6 +69,9 @@ var app = {
       app.jst[$(this).prop("id")] = _.template($(this).text());
     });
 
+    // Save default settings
+    app.settings(app.settings());
+
     // Initialize the websocket connection and all the views
     // and event bindings right after
     app.connection = new app.Connection(function() {
@@ -78,6 +87,7 @@ var app = {
       app.editView = new app.EditView();
       app.codeView = new app.CodeView();
       app.listView = new app.ListView({ collection: app.pasteCollection });
+      app.settingsView = new app.SettingsView();
 
       // Start router
       Backbone.history.start();
@@ -108,6 +118,7 @@ var app = {
       ""            : "edit",
       ":name/:id"   : "code",
       "list"        : "list",
+      "settings"    : "settings",
       "about"       : "about"
     },
 
@@ -131,6 +142,10 @@ var app = {
         app.listView.render();
       }
       app.listView.show();
+    },
+
+    settings: function() {
+      app.settingsView.render().show();
     },
 
     about: function() {

@@ -22,7 +22,7 @@ app.ListPasteView = Backbone.View.extend({
     this.$("pre").code(this.model, {
       lines: false,
       compress: true,
-      length: 300
+      length: app.snippetLen
     });
     return this;
   },

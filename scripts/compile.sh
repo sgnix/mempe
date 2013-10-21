@@ -18,6 +18,7 @@ uglifyjs \
     $DIR/js/mvc/edit.js \
     $DIR/js/mvc/code.js \
     $DIR/js/mvc/list.js \
+    $DIR/js/mvc/settings.js \
     -m -c --screw-ie8 \
     > code.js
 

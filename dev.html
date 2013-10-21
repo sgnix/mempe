@@ -25,6 +25,7 @@
   <script src="src/js/mvc/edit.js"></script>
   <script src="src/js/mvc/code.js"></script>
   <script src="src/js/mvc/list.js"></script>
+  <script src="src/js/mvc/settings.js"></script>
 
   <script type="text/javascript">
     less.watch();
@@ -40,8 +41,9 @@
       <div class="logo"><b>mem.pe</b></div>
       <ul class="links">
         <li><span><a href="#">paste</a></span></li>
-        <li><span><a href="#/list">local</a></span></li>
-        <li class="right"><span><a href="#about">about</a></span></li>
+        <li><span><a href="#/list">list</a></span></li>
+        <li><span><a href="#settings">settings</a></span></li>
+        <li><span><a href="#about">about</a></span></li>
       </ul>
     </div>
 
@@ -56,6 +58,9 @@
 
       <ul id="list">
       </ul>
+
+      <div id="settings">
+      </div>
 
       <div id="message">
       </div>
@@ -105,6 +110,32 @@
     <div class="navigate">
       <pre class="scroll"></pre>
     </div>
+  </script>
+
+  <script id="settingsView" type="text/template">
+    <div class="error hide">
+    </div>
+    <table>
+      <tr>
+        <td>username</td>
+        <td>
+          <input name="username" value="<%= username %>">
+          <small>will be part of your URL</small>
+        </td>
+      </tr>
+      <tr>
+        <td>tab size</td>
+        <td>
+          <input name="tabsize" value="<%= tabsize %>">
+          <small>spaces</small>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button>update</button>
+        </td>
+      </tr>
+    </table>
   </script>
 
   <script id="error_REMOTE_NOT_FOUND" type="text/template">
@@ -169,6 +200,9 @@
     </p>
     <p>
       This site uses HTML5, so if you're using an old browser, you won't be able to see this message.
+    </p>
+    <p>
+      Fork on Github - <a href="https://github.com/naturalist/mempe">https://github.com/naturalist/mempe</a>
     </p>
   </script>
 </body>

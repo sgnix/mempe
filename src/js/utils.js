@@ -91,3 +91,19 @@ app.identity = function(value) {
   }
   return name;
 };
+
+app.settings = function(value) {
+  if ( typeof value === "object"  ) {
+    localStorage.setItem(app.settingsKey, JSON.stringify(value));
+  } else {
+    value = {};
+    try {
+      value = JSON.parse(localStorage.getItem(app.settingsKey)) || {};
+    } catch (e) {
+      console.error("Can't parse settings");
+    }
+    _.defaults(value, app.settingsDefaults);
+  }
+
+  return value;
+};

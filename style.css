@@ -3,13 +3,14 @@ body{margin:0;padding:0;line-height:1.5;font-size:85%;color:#222;background:#fff
 pre,.code{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12px}
 .hide{display:none}
 .right{float:right !important}
+.error{background:#fdecec;padding:5px;border:1px solid #c1c1c1}
 textarea:focus,input:focus{outline:0}
 #header{background:#2b2a2b;color:#eee;border-bottom:3px solid #e5ecf9;height:30px}#header a{color:#a0a0a0;text-decoration:none;text-shadow:1px 1px #000}#header a:hover{color:#ccc}
 #header .logo{float:left;height:30px;cursor:pointer;background:#060;padding:0 7px;margin-right:7px;display:table;text-shadow:1px 1px #000}#header .logo b{display:table-cell;vertical-align:middle;text-align:center}
 #header li{padding:0 3px}
 #header .border{border-right:1px solid #555}
 #container{width:945px;margin:0 auto}
-button.yes,button.cancel{border:1px solid #999;border-radius:4px;-moz-border-radius:4px}button.yes:hover,button.cancel:hover{box-shadow:0 0 2px #159}
+button.yes,button.cancel{border:1px solid #999;border-radius:4px;-moz-border-radius:4px;margin-right:2px}button.yes:hover,button.cancel:hover{box-shadow:0 0 2px #159}
 button.yes{background-color:#fcc}
 ul.links{padding:0;margin:0;list-style-type:none}ul.links li{float:left;display:table;height:30px;text-overflow:ellipsis}ul.links li span{display:table-cell;vertical-align:middle;text-align:center;padding:0 3px}
 ul#list{padding:10px 0;margin:0;list-style-type:none}ul#list li.box{width:295px;max-height:200px;float:left;margin-right:7px;margin-bottom:15px;padding:3px;border:1px dashed #ccc;cursor:pointer}ul#list li.box:hover{border:1px solid #aaa}
@@ -32,6 +33,7 @@ ul#list pre{padding:3px;margin:0;height:100px}
 .toolbar .remove{color:#600}
 .toolbar .separator{color:#ccc}
 .toolbar small{border-radius:8px;-moz-border-radius:8px;font-variant:small-caps;font-size:1em;border:1px solid #e5ecf9;background:#e5ecf9;color:#333;text-shadow:1px 1px #fff;padding:0 3px}
+table input{border:1px solid #ccc;padding:2px}
 .pln{color:#000}
 @media screen{.str{color:#080} .kwd{color:#008} .com{color:#800} .typ{color:#606} .lit{color:#066} .pun,.opn,.clo{color:#660} .tag{color:#008} .atn{color:#606} .atv{color:#080} .dec,.var{color:#606} .fun{color:#f00}}@media print,projection{.str{color:#060} .kwd{color:#006;font-weight:bold} .com{color:#600;font-style:italic} .typ{color:#404;font-weight:bold} .lit{color:#044} .pun,.opn,.clo{color:#440} .tag{color:#006;font-weight:bold} .atn{color:#404} .atv{color:#060}}pre.prettyprint{padding:2px;border:1px solid #888}
 ol.linenums{margin-top:0;margin-bottom:0}
