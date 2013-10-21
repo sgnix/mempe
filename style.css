@@ -1,6 +1,6 @@
 .center{display:table-cell;vertical-align:middle;text-align:center}
 body{margin:0;padding:0;line-height:1.5;font-size:85%;color:#222;background:#fff;font-family:"Helvetica Neue",Arial,Helvetica,sans-serif}
-pre,.code{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12px}
+pre,.code{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12px;overflow-x:auto}
 .hide{display:none}
 .right{float:right !important}
 .error{background:#fdecec;padding:5px;border:1px solid #c1c1c1}
