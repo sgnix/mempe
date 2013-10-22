@@ -2,6 +2,7 @@
 @green: #060;
 @headerHeight: 30px;
 @width: 945px;
+@accentColor: #9F82F8;
 
 .center {
   display: table-cell;
@@ -52,7 +53,6 @@ textarea:focus, input:focus {
 #header {
   background: #2B2A2B;
   color: #eee;
-  border-bottom: 3px solid @blue;
   height: @headerHeight;
   a {
     color: #a0a0a0;
@@ -83,6 +83,14 @@ textarea:focus, input:focus {
 
   .border {
     border-right: 1px solid #555;
+  }
+
+  .slogan {
+    color: @accentColor;
+    border-bottom: 1px solid @accentColor;
+    &:hover {
+      border-bottom: 1px solid #ccc;
+    }
   }
 }
 
@@ -231,9 +239,11 @@ ul#list {
     border: 1px solid #aaa;
     background: #ffe;
     margin-bottom: 0;
-    width: 99%;
+    width: @width - 8;
     height: 250px;
     clear: both;
+    padding: 3px;
+    resize: vertical;
   }
   button {
     font-size: 120%;
