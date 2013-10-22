@@ -5,10 +5,11 @@ pre,.code{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12p
 .right{float:right !important}
 .error{background:#fdecec;padding:5px;border:1px solid #c1c1c1}
 textarea:focus,input:focus{outline:0}
-#header{background:#2b2a2b;color:#eee;border-bottom:3px solid #e5ecf9;height:30px}#header a{color:#a0a0a0;text-decoration:none;text-shadow:1px 1px #000}#header a:hover{color:#ccc}
+#header{background:#2b2a2b;color:#eee;height:30px}#header a{color:#a0a0a0;text-decoration:none;text-shadow:1px 1px #000}#header a:hover{color:#ccc}
 #header .logo{float:left;height:30px;cursor:pointer;background:#060;padding:0 7px;margin-right:7px;display:table;text-shadow:1px 1px #000}#header .logo b{display:table-cell;vertical-align:middle;text-align:center}
 #header li{padding:0 3px}
 #header .border{border-right:1px solid #555}
+#header .slogan{color:#9f82f8;border-bottom:1px solid #9f82f8}#header .slogan:hover{border-bottom:1px solid #ccc}
 #container{width:945px;margin:0 auto}
 button.yes,button.cancel{border:1px solid #999;border-radius:4px;-moz-border-radius:4px;margin-right:2px}button.yes:hover,button.cancel:hover{box-shadow:0 0 2px #159}
 button.yes{background-color:#fcc}
@@ -25,7 +26,7 @@ ul#list pre{padding:3px;margin:0;height:100px}
 .scroll::-webkit-scrollbar-thumb:vertical{background-color:rgba(0,0,0,0.2);-webkit-border-radius:6px}
 .scroll::-webkit-scrollbar-thumb:vertical:hover,.scroll::-webkit-scrollbar-thumb:horizontal:hover{background-color:rgba(0,0,0,0.3)}
 .scroll::-webkit-scrollbar-thumb:horizontal{background-color:rgba(0,0,0,0.2);-webkit-border-radius:6px}
-#edit textarea{border:1px solid #aaa;background:#ffe;margin-bottom:0;width:99%;height:250px;clear:both}
+#edit textarea{border:1px solid #aaa;background:#ffe;margin-bottom:0;width:937px;height:250px;clear:both;padding:3px;resize:vertical}
 #edit button{font-size:120%;font-weight:bold}
 .toolbar{padding:3px 0;height:30px;border-bottom:1px solid #ccc}.toolbar .title{font-size:14px;font-weight:bold;padding:0 3px}.toolbar .title input{border:1px solid #ddd;padding:1px 2px;font-size:14px;font-weight:bold}
 .toolbar .date{color:#888;font-size:.9em}
