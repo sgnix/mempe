@@ -1,6 +1,17 @@
 
 app.PasteCollection = Backbone.Collection.extend({
-  model: app.PasteModel
+  model: app.PasteModel,
+
+  initialize: function() {
+    this.on('remove', this.remove, this);
+  },
+
+  remove: function(model) {
+    app.storage.remove(model.get('id'));
+    if (model.view) {
+      model.view.$el.remove();
+    }
+  }
 });
 
 app.ListPasteView = Backbone.View.extend({
@@ -48,7 +59,6 @@ app.ListView = app.Pane.extend({
   initialize: function() {
     this.rendered = false;
     this.collection.on('add', this.add, this);
-    this.collection.on('remove', this.remove, this);
   },
 
   _addView: function(model) {
@@ -75,16 +85,6 @@ app.ListView = app.Pane.extend({
 
     if ( this.rendered )
       this._addView(model);
-  },
-
-  remove: function(model) {
-    app.storage.remove(model.get('id'));
-    if (this.rendered) {
-      model.view.$el.animate(
-        {opacity: 0}, "fast", "ease-out",
-        function() { $(this).remove(); }
-      );
-    }
   }
 });
 
