@@ -5,11 +5,14 @@ app.Connection = (function () {
   function Connection(onopen) {
     var _this = this;
 
+    function webSocketError() {
+      app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
+    }
+
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
     if ( !window.WebSocket ) {
-      app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
-      return;
+      return webSocketError();
     }
 
     webSocket = new WebSocket("ws://" + location.hostname + ':' + app.socketPort);
@@ -25,9 +28,7 @@ app.Connection = (function () {
     };
 
     // webSocket error
-    webSocket.onerror = function() {
-      app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
-    };
+    webSocket.onerror = webSocketError;
 
     // webSocket message
     webSocket.onmessage = function (message) {
@@ -44,6 +45,8 @@ app.Connection = (function () {
         _this.processMessage(data.action, data.args);
       }
     };
+
+    webSocket.onclose = webSocketError;
   }
 
   Connection.prototype.processMessage = function (action, args) {
