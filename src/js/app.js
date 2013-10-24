@@ -72,16 +72,21 @@ var app = {
     // Save default settings
     app.settings(app.settings());
 
+    // Messages
+    app.message = new app.MessageModel();
+    new app.MessageView({ model: app.message });
+
+    // Collection of pastes
+    app.pasteCollection = new app.PasteCollection(app.storage.collection());
+
+    // DOM initializations
+    $(".logo").on("click", function() {
+      app.router.navigate("", {trigger: true});
+    });
+
     // Initialize the websocket connection and all the views
     // and event bindings right after
     app.connection = new app.Connection(function() {
-
-      // Messages
-      app.message = new app.MessageModel();
-      new app.MessageView({ model: app.message });
-
-      // Collection of pastes
-      app.pasteCollection = new app.PasteCollection(app.storage.collection());
 
       // Views
       app.editView = new app.EditView();
@@ -91,10 +96,6 @@ var app = {
 
       // Start router
       Backbone.history.start();
-
-      $(".logo").on("click", function() {
-        app.router.navigate("", {trigger: true});
-      });
 
     });
   },

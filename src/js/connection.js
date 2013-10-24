@@ -6,6 +6,12 @@ app.Connection = (function () {
     var _this = this;
 
     window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+    if ( !window.WebSocket ) {
+      app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
+      return;
+    }
+
     webSocket = new WebSocket("ws://" + location.hostname + ':' + app.socketPort);
 
     // webSocket open
@@ -19,7 +25,9 @@ app.Connection = (function () {
     };
 
     // webSocket error
-    webSocket.onerror = app.fatal("Can not establish websocket connection");
+    webSocket.onerror = function() {
+      app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
+    };
 
     // webSocket message
     webSocket.onmessage = function (message) {

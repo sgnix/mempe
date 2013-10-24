@@ -135,10 +135,24 @@
   </script>
 
   <script id="error_NOT_CONNECTED" type="text/template">
-    <p><strong>Error 410 - Gone</strong><p>
+    <p><strong>Error - Host has disconnected</strong><p>
     The client who owns this paste has diconnected. They might have closed their browser, or just the tab with mem.pe.
     Please contact the person who sent you this link and ask them to log on to http://mem.pe. Once they do, you will
     be able to access this page again.
+  </script>
+
+  <script id="error_NO_WEBSOCKET" type="text/template">
+      <p><strong>Error - Unable to establish websocket connection</strong><p>
+      Your browser could not connect to websocket.
+      Some of the possible reasons for this to happen are:
+      <ul>
+        <li>You are using an old browser that doesn't support websockets</li>
+        <li>
+          You are behind a firewall or VPN that blocks websockets.
+          See <a href='http://websocketstest.com/'>websocketstest.com</a> to make sure that your network allows websockets.
+        </li>
+        <li>There is a server problem. Please contact the site author at <i>stefan.guen</i>&#9774;gmail.</li>
+      </ul>
   </script>
 
   <script id="info_NO_PASTES" type="text/template">

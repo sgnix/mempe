@@ -1,7 +1,12 @@
 // Fatal error
 app.fatal = function(message) {
   return function() {
-    throw new Error(message);
+    app.message.set({
+      type: "error",
+      name: "CUSTOM",
+      args: { message: message }
+    })
+    .trigger('show');
   }
 };
 

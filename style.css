@@ -9,7 +9,7 @@ textarea:focus,input:focus{outline:0}
 #header .logo{float:left;height:30px;cursor:pointer;background:#060;padding:0 7px;margin-right:7px;display:table;text-shadow:1px 1px #000}#header .logo b{display:table-cell;vertical-align:middle;text-align:center}
 #header li{padding:0 3px}
 #header .border{border-right:1px solid #555}
-#header .slogan{color:#9f82f8;border-bottom:1px solid #9f82f8}#header .slogan:hover{border-bottom:1px solid #ccc}
+#header .slogan{color:#9f82f8}
 #container{width:945px;margin:0 auto}
 button.yes,button.cancel{border:1px solid #999;border-radius:4px;-moz-border-radius:4px;margin-right:2px}button.yes:hover,button.cancel:hover{box-shadow:0 0 2px #159}
 button.yes{background-color:#fcc}
