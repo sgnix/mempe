@@ -1,5 +1,5 @@
 var app = {
-  socketPort: 8181,
+  socketPort: 443,
   identityKey: 'name',
   storageKey: 'mempes',
   storageIdKey: 'id',

@@ -73,13 +73,13 @@ var Client = (function () {
         _this.send(action, args);
         break;
 
+      /*
       case "clients":
-        var names = [];
-        for ( var n in clients ) {
-          names.push(n);
-        }
+        var n, names = [];
+        for ( n in clients ) names.push(n);
         _this.send(action, { names: names });
         break;
+      */
     }
   }
 
@@ -102,7 +102,7 @@ var Client = (function () {
 // -------------------------------------------------------
 var Socket = (function () {
   var httpServer, socketServer, port, callbacks;
-  port = 8181;
+  port = 443;
 
   function Socket() {
 
