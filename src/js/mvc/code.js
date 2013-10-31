@@ -1,3 +1,40 @@
+app.Indicator = (function(){
+
+  var Model = Backbone.Model.extend({
+    defaults: {
+      value: null
+    }
+  });
+
+  var View = Backbone.View.extend({
+    initialize: function() {
+      this.model.on('change', this.render, this);
+    },
+
+    render: function() {
+      this.$el.text(this.model.get('value'));
+    }
+  });
+
+  function Indicator(el) {
+    var model = new Model({ value: $(el).text() });
+    var view = new View({ model: model, el: el });
+
+    return {
+      model: model,
+      view: view,
+      set: function(value) {
+        this.model.set('value', value)
+      },
+      get: function() {
+        return this.mode.get('value');
+      }
+    }
+  }
+
+  return Indicator;
+
+})();
 
 app.CodeView = app.Pane.extend({
   el: "#code",
@@ -6,6 +43,9 @@ app.CodeView = app.Pane.extend({
     "change select": "setSyntax",
     "click .fork": "fork",
     "click .raw": "raw",
+    "click .edit": "edit",
+    "click .save": "save",
+    "click .cancel": "render",
     "click .remove": "askRemove"
   },
 
@@ -25,6 +65,10 @@ app.CodeView = app.Pane.extend({
         _this.model.set('title', title);
       });
 
+      // Viewers indicator
+      this.viewers = new app.Indicator(this.$('.viewers'));
+
+      // Syntax select
       this.$('.syntax').html(app.jst.syntaxView({m: this.model}));
     }
 
@@ -33,7 +77,7 @@ app.CodeView = app.Pane.extend({
 
   setSyntax: function() {
     this.model.set('syntax', this.$("select").val());
-    this.renderText();
+    this.render();
   },
 
   fork: function(e) {
@@ -56,6 +100,17 @@ app.CodeView = app.Pane.extend({
       this.renderText();
       this.rawDisplay = false;
     }
+  },
+
+  edit: function(e) {
+    e.stopPropagation();
+    this.$(".content").html(app.jst.editCodeView({m: this.model}));
+    this.$("textarea").focus();
+  },
+
+  save: function() {
+    this.model.set('text', this.textarea.val());
+    this.render();
   },
 
   askRemove: function() {

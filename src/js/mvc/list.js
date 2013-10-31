@@ -3,10 +3,10 @@ app.PasteCollection = Backbone.Collection.extend({
   model: app.PasteModel,
 
   initialize: function() {
-    this.on('remove', this.remove, this);
+    this.on('remove', this._remove, this);
   },
 
-  remove: function(model) {
+  _remove: function(model) {
     app.storage.remove(model.get('id'));
     if (model.view) {
       model.view.$el.remove();

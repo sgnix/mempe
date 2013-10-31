@@ -50,6 +50,32 @@ textarea:focus, input:focus {
   outline: 0;
 }
 
+.link {
+  color: #1aa;
+  cursor: pointer;
+  font-variant: small-caps;
+  padding: 2px;
+  &:hover {
+    text-decoration: underline;
+    color: @accentColor;
+  }
+}
+
+.remove {
+  color: #a11;
+  &:hover {
+    color: #e00;
+  }
+}
+
+.separator {
+  color: #ccc;
+  &:after {
+    content: "⁝";
+  }
+}
+
+
 #header {
   background: #2B2A2B;
   color: #eee;
@@ -126,9 +152,10 @@ ul.links {
     text-overflow: ellipsis;
 
     span {
-        .center;
-        padding: 0 3px;
+      .center;
+      padding: 0 3px;
     }
+
   }
 }
 
@@ -230,7 +257,7 @@ ul#list {
 	-webkit-border-radius: 6px;
 }
 
-#edit {
+.editor {
   textarea {
     border: 1px solid #aaa;
     background: #ffe;
@@ -240,19 +267,26 @@ ul#list {
     clear: both;
     padding: 3px;
     resize: vertical;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-size: 12px;
   }
   button {
     font-size: 120%;
     font-weight: bold;
   }
+  .cancel {
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
 // code toolbar
 .toolbar {
-  //border-bottom: 1px solid #eee;
   padding: 3px 0;
   height: @headerHeight;
-  border-bottom: 1px solid #ccc;
+  background: #f5f5f5;
+  border-bottom: 1px dotted #ccc;
 
   .title {
     font-size: 14px;
@@ -272,22 +306,13 @@ ul#list {
     font-size: .9em;
   }
 
-  .link {
-    color: #00c;
-    cursor: pointer;
-    font-variant: small-caps;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+}
 
-  .remove {
-    color: #600;
-  }
-
-  .separator {
-    color: #ccc;
-  }
+.codebar {
+  width: @width;
+  clear: both;
+  margin: 3px 0;
+  padding: 0;
 
   // The syntax pill
   small {

@@ -48,7 +48,7 @@
     </div>
 
     <div id="panes">
-      <div id="edit">
+      <div id="edit" class="editor">
         <textarea class="scroll" wrap="off" autofocus="autofocus"></textarea>
         <button>save</button>
       </div>
@@ -72,23 +72,33 @@
       <ul class="links">
         <li><span class="title"><%- m.title() %></span></li>
         <li class="right"><span class="date"><%= m.created() %></span></li>
-        <li class="right"><span class="separator">|</span></li>
         <% if ( m.app().ownPaste ) { %>
-          <li class="right"><span class="link remove">del</span></li>
-        <% } else { %>
-          <li class="right"><span class="link fork">fork</span></li>
+          <li class="right"><span class="separator"></span></li>
+          <li class="right"><span class="link remove">delete</span></li>
         <% } %>
-        <% if ( m.syntax() ) { %>
-          <li class="right"><span class="separator">|</span></li>
-          <li class="right"><span class="link raw">raw view</span></li>
-        <% } %>
-        <li class="right"><span class="separator">|</span></li>
-        <li class="right"><span class="syntax"><small><%= m.syntax() || "text"  %></small></span>
-        </li>
       </ul>
     </div>
-    <div>
+    <div class="content">
+      <div class="codebar">
+        <% if ( m.syntax() ) { %>
+          <span class="link raw">view raw</span>
+          <span class="separator"></span>
+        <% } %>
+        <% if ( m.app().ownPaste ) { %>
+          <span class="link edit">edit</span>
+        <% } else { %>
+          <span class="link fork">fork</span>
+        <% } %>
+        <span class="syntax right"><small><%= m.syntax() || "text"  %></small></span>
+      </div>
       <pre class="scroll"></pre>
+    </div>
+  </script>
+
+  <script id="editCodeView" type="text/template">
+    <div class="editor">
+      <textarea><%= m.get('text') %></textarea>
+      <button>save</button> <small class="cancel">cancel</small>
     </div>
   </script>
 
