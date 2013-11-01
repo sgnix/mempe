@@ -1,41 +1,3 @@
-app.Indicator = (function(){
-
-  var Model = Backbone.Model.extend({
-    defaults: {
-      value: null
-    }
-  });
-
-  var View = Backbone.View.extend({
-    initialize: function() {
-      this.model.on('change', this.render, this);
-    },
-
-    render: function() {
-      this.$el.text(this.model.get('value'));
-    }
-  });
-
-  function Indicator(el) {
-    var model = new Model({ value: $(el).text() });
-    var view = new View({ model: model, el: el });
-
-    return {
-      model: model,
-      view: view,
-      set: function(value) {
-        this.model.set('value', value)
-      },
-      get: function() {
-        return this.mode.get('value');
-      }
-    }
-  }
-
-  return Indicator;
-
-})();
-
 app.CodeView = app.Pane.extend({
   el: "#code",
 
@@ -64,9 +26,6 @@ app.CodeView = app.Pane.extend({
       this.$('.title').editable(function(title) {
         _this.model.set('title', title);
       });
-
-      // Viewers indicator
-      this.viewers = new app.Indicator(this.$('.viewers'));
 
       // Syntax select
       this.$('.syntax').html(app.jst.syntaxView({m: this.model}));
@@ -109,7 +68,7 @@ app.CodeView = app.Pane.extend({
   },
 
   save: function() {
-    this.model.set('text', this.textarea.val());
+    this.model.set('text', this.$('textarea').val());
     this.render();
   },
 
