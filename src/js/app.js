@@ -124,10 +124,9 @@ var app = {
       app.editView.show();
     },
 
-    code: function (name, id) {
+    code: function(name, id) {
       app.loadPaste(name, id, function(paste) {
-        app.codeView.model = paste;
-        app.codeView.render().show();
+        app.codeView.setModel(paste).render().show();
       });
     },
 

@@ -11,6 +11,21 @@ app.CodeView = app.Pane.extend({
     "click .remove": "askRemove"
   },
 
+  setModel: function(model) {
+    app.connection.off('broadcast:change');
+    if (!model.isOwn()) {
+      var _this = this;
+      app.connection.on('broadcast:change', function(args) {
+        if (args.id === model.get('id') && args.name === model.get('name')) {
+          _this.model.set(args.changes);
+          _this.render();
+        }
+      });
+    }
+    this.model = model;
+    return this;
+  },
+
   renderText: function() {
     this.$("pre").code(this.model);
   },
@@ -25,6 +40,7 @@ app.CodeView = app.Pane.extend({
       var _this = this;
       this.$('.title').editable(function(title) {
         _this.model.set('title', title);
+        _this.broadcastChange();
       });
 
       // Syntax select
@@ -36,6 +52,7 @@ app.CodeView = app.Pane.extend({
 
   setSyntax: function() {
     this.model.set('syntax', this.$("select").val());
+    this.broadcastChange();
     this.render();
   },
 
@@ -70,6 +87,7 @@ app.CodeView = app.Pane.extend({
 
   save: function() {
     this.model.set('text', this.$('textarea').val());
+    this.broadcastChange();
     this.render();
   },
 
@@ -82,6 +100,16 @@ app.CodeView = app.Pane.extend({
         app.pasteCollection.remove(_this.model);
         app.router.navigate('list', {trigger: true});
       }
+    });
+  },
+
+  broadcastChange: function() {
+    var model = this.model.toJSON();
+    app.connection.send('broadcast', {
+      action: 'change',
+      id: model.id,
+      name: app.identity(),
+      changes: _(model).pick('title', 'syntax', 'text')
     });
   }
 

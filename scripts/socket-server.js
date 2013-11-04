@@ -69,7 +69,12 @@ var Client = function(connection) {
     args.name = self.name;
     for ( name in clients ) {
       if ( name != self.name ) {
-        clients[name].send('broadcast', args);
+        var action = 'broadcast';
+        if ( args.action ) {
+          action += ":" + args.action;
+          delete args.action;
+        }
+        clients[name].send(action, args);
       }
     }
   });
