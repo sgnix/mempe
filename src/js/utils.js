@@ -76,7 +76,7 @@ app.loadPaste = function(name, id, onSuccess) {
       error("LOCAL_NOT_FOUND");
     }
   } else {
-    app.connection.send("fetch", { name: name, id: id }, function(doc) {
+    app.connection.request("fetch", { name: name, id: id }, function(doc) {
       if ( !doc.error ) {
         var paste = new app.PasteModel(doc);
         onSuccess(paste);

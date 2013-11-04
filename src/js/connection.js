@@ -1,9 +1,16 @@
 app.Connection = (function () {
 
-  var webSocket, callbacks = {};
+  var webSocket;
 
   function Connection(onopen) {
-    var _this = this;
+    var self = this;
+
+    // Mix in Backbone events
+    _.extend(self, Backbone.Events);
+
+    self.on('get', function(args) {
+      self.send('get', app.storage.get(args.id) );
+    });
 
     function webSocketError() {
       app.message.set({ type: "error", name: "NO_WEBSOCKET" }).trigger('show');
@@ -21,7 +28,7 @@ app.Connection = (function () {
     // Register as a client and get a name
     webSocket.onopen = function(){
       var name = app.settings().username;
-      _this.send("register", { name: name }, function(res){
+      self.request("register", { name: name }, function(res){
         app.identity(res.name);
         onopen && onopen();
       });
@@ -38,36 +45,24 @@ app.Connection = (function () {
       } catch (e) {
         _log("Bad JSON message [" + message.data + "]")();
       }
-      var cb = callbacks[data.action];
-      if (typeof cb === "function") {
-        cb.call(_this, data.args);
-      } else {
-        _this.processMessage(data.action, data.args);
-      }
+      self.trigger(data.action, data.args);
     };
 
     webSocket.onclose = webSocketError;
   }
 
-  Connection.prototype.processMessage = function (action, args) {
-    var _this = this;
-    switch (action) {
-    case "get":
-      this.send("get", app.storage.get(args.id) );
-      break;
-    }
-  };
-
-  Connection.prototype.send = function (action, args, cb) {
+  Connection.prototype.send = function (action, args) {
     var message = JSON.stringify({
       action: action,
       args: args
     });
-    if (typeof cb === "function") {
-      callbacks[action] = cb;
-    }
     webSocket.send(message);
   };
+
+  Connection.prototype.request = function(action, args, callback) {
+    this.once(action, callback);
+    this.send(action, args);
+  }
 
   return Connection;
 })();
