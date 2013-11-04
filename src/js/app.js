@@ -54,9 +54,6 @@ var app = {
     yaml    : ["yaml", "lang-yaml.js"]
   },
 
-  // Will be set by the router on loading new paste
-  ownPaste: false,
-
   // Bootstrap
   run: function() {
 

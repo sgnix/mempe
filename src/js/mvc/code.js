@@ -21,7 +21,7 @@ app.CodeView = app.Pane.extend({
 
     // If own paste, then make the title editable and allow
     // for selecting syntax
-    if ( app.ownPaste ) {
+    if ( this.model.isOwn() ) {
       var _this = this;
       this.$('.title').editable(function(title) {
         _this.model.set('title', title);

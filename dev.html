@@ -72,7 +72,7 @@
       <ul class="links">
         <li><span class="title"><%- m.title() %></span></li>
         <li class="right"><span class="date"><%= m.created() %></span></li>
-        <% if ( m.app().ownPaste ) { %>
+        <% if ( m.isOwn() ) { %>
           <li class="right"><span class="separator"></span></li>
           <li class="right"><span class="link remove">delete</span></li>
         <% } %>
@@ -84,7 +84,7 @@
           <span class="link raw">view raw</span>
           <span class="separator"></span>
         <% } %>
-        <% if ( m.app().ownPaste ) { %>
+        <% if ( m.isOwn() ) { %>
           <span class="link edit">edit</span>
         <% } else { %>
           <span class="link fork">fork</span>

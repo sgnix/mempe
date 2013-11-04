@@ -64,20 +64,28 @@ app.confirm = function(opts) {
 app.loadPaste = function(name, id, onSuccess) {
 
   function error(name) {
-    app.message.set({ type: "error", name: name }).trigger('show');
+    app.message.set({
+      type: "error",
+      name: name
+    }).trigger('show');
   }
 
-  app.ownPaste = name === app.identity();
-  if ( app.ownPaste ) {
-    var paste = app.pasteCollection.findWhere({id: parseInt(id)});
-    if ( paste ) {
+  if (name === app.identity()) {
+    var paste = app.pasteCollection.findWhere({
+      id: parseInt(id)
+    });
+    if (paste) {
       onSuccess(paste);
     } else {
       error("LOCAL_NOT_FOUND");
     }
   } else {
-    app.connection.request("fetch", { name: name, id: id }, function(doc) {
-      if ( !doc.error ) {
+    app.connection.request("fetch", {
+      name: name,
+      id: id
+    }, function(doc) {
+      if (!doc.error) {
+        doc.name = name;
         var paste = new app.PasteModel(doc);
         onSuccess(paste);
       } else {

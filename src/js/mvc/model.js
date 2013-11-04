@@ -18,7 +18,9 @@ app.PasteModel = Backbone.Model.extend({
   },
 
   store: function() {
-    app.storage.set(this.toJSON());
+    if ( this.isOwn() ) {
+      app.storage.set(this.toJSON());
+    }
   },
 
   title: function( maxLen ) {
@@ -38,6 +40,10 @@ app.PasteModel = Backbone.Model.extend({
 
   created: function() {
     return (new Date(this.get('created'))).toLocaleString();
+  },
+
+  isOwn: function() {
+    return !this.has('name');
   }
 
 });
