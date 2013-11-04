@@ -44,6 +44,7 @@ app.CodeView = app.Pane.extend({
     var json = this.model.toJSON();
     delete json.id;
     delete json.created;
+    delete json.name;
     var paste = new app.PasteModel(json);
     app.pasteCollection.add(paste);
     app.router.navigate(paste.url(), {trigger: true});
