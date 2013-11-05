@@ -120,3 +120,19 @@ app.settings = function(value) {
 
   return value;
 };
+
+app.toggleLights = function() {
+  var settings = app.settings();
+  if (app.darkness) {
+    $(app.darkness).remove();
+    app.darkness = null;
+    settings.dark = false;
+    app.settings(settings);
+  } else {
+    $.getStyle("dark.css", function(e) {
+      app.darkness = e;
+      settings.dark = true;
+      app.settings(settings);
+    });
+  }
+};

@@ -17,3 +17,24 @@
     };
 
 })(Zepto);
+
+
+;(function($){
+    var loaded = {};
+    if ( $.hasOwnProperty('getStyle') ) return;
+
+    $.getStyle = function (url, success, error) {
+
+        var style = document.createElement("link"),
+            $style = $(style);
+        style.href = url;
+        style.type = "text/css";
+        style.rel = "stylesheet";
+
+        $("head").append(style);
+        $style.bind("load", function() { success(style) });
+        $style.bind("error", error);
+    };
+
+})(Zepto);
+

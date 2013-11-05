@@ -81,6 +81,15 @@ var app = {
       app.router.navigate("", {trigger: true});
     });
 
+    if ( app.settings().dark ) {
+      app.toggleLights();
+    }
+
+    $("#dark").click(function(e) {
+      e.preventDefault();
+      app.toggleLights();
+    });
+
     // Initialize the websocket connection and all the views
     // and event bindings right after
     app.connection = new app.Connection(function() {
