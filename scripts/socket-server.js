@@ -67,13 +67,15 @@ var Client = function(connection) {
   // ----------------------------------
   self.on('broadcast', function(args) {
     args.name = self.name;
+
+    var action = 'broadcast';
+    if ( args.action ) {
+      action += ":" + args.action;
+      delete args.action;
+    }
+
     for ( name in clients ) {
       if ( name != self.name ) {
-        var action = 'broadcast';
-        if ( args.action ) {
-          action += ":" + args.action;
-          delete args.action;
-        }
         clients[name].send(action, args);
       }
     }
