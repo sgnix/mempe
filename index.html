@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>mem.pe: Local storage text paste sharing over websockets</title>
-  <link rel="stylesheet" type="text/css" href="style.css?1" />
+  <link rel="stylesheet" type="text/css" href="style.css?2" />
   <script src="syntax/prettify.js"></script>
-  <script src="code.js?1"></script>
+  <script src="code.js?2"></script>
   <script type="text/javascript">
     $(function() { app.run(); });
   </script>
@@ -18,7 +18,8 @@
         <li><span><a href="#">paste</a></span></li>
         <li><span><a href="#/list">list</a></span></li>
         <li><span><a href="#settings">settings</a></span></li>
-        <li class="right"><span><a class="slogan" href="#about">Paste to local storage, share via a web socket</a></span></li>
+        <li><span><a href="" id="dark">&#9681;</a></span></li>
+        <li class="right"><span><a class="slogan" href="#about">about</a></span></li>
       </ul>
     </div>
 
@@ -47,7 +48,7 @@
       <ul class="links">
         <li><span class="title"><%- m.title() %></span></li>
         <li class="right"><span class="date"><%= m.created() %></span></li>
-        <% if ( m.app().ownPaste ) { %>
+        <% if ( m.isOwn() ) { %>
           <li class="right"><span class="separator"></span></li>
           <li class="right"><span class="link remove">delete</span></li>
         <% } %>
@@ -59,7 +60,7 @@
           <span class="link raw">view raw</span>
           <span class="separator"></span>
         <% } %>
-        <% if ( m.app().ownPaste ) { %>
+        <% if ( m.isOwn() ) { %>
           <span class="link edit">edit</span>
         <% } else { %>
           <span class="link fork">fork</span>
