@@ -1,5 +1,5 @@
 var app = {
-  socketPort: 443,
+  socketUrl: 'wss://' + location.hostname + '/socket',
   identityKey: 'name',
   storageKey: 'mempes',
   storageIdKey: 'id',

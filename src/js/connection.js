@@ -22,7 +22,7 @@ app.Connection = (function () {
       return webSocketError();
     }
 
-    webSocket = new WebSocket("ws://" + location.hostname + ':' + app.socketPort);
+    webSocket = new WebSocket(app.socketUrl);
 
     // webSocket open
     // Register as a client and get a name

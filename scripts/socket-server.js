@@ -7,7 +7,7 @@ var
   WebSocketServer = require('websocket').server;
 
 var
-  port = 443,
+  port = 8081,
   clients = {};
 
 // Class 'Client': Creates a client based on a
