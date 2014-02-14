@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>mem.pe: Local storage text paste sharing over websockets</title>
+
+  <!-- DEV BEGIN ************************************************ -->
   <link rel="stylesheet/less" type="text/css" href="src/css/mempe.less" />
   <link rel="stylesheet" type="text/css" href="src/css/prettify.css" />
   <link rel="stylesheet" type="text/css" href="src/css/theme.css" />
@@ -29,9 +31,12 @@
 
   <script type="text/javascript">
     less.watch();
-    $(function() {
-      app.run();
-    });
+    app.socketUrl = "ws://localhost:8081";
+  </script>
+  <!-- DEV END ************************************************* -->
+
+  <script type="text/javascript">
+    $(function() { app.run(); });
   </script>
 
 </head>
