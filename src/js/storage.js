@@ -71,5 +71,46 @@ app.storage = (function(){
     return collection.length;
   };
 
+  Storage.prototype.stringify = function() {
+    return JSON.stringify(this.collection(), undefined, app.settings().tabsize);
+  };
+
+  Storage.prototype.reset = function(text) {
+    var arr = JSON.parse(text);
+
+    // The whole collection must be an array
+    if (!_.isArray(arr)) {
+      throw new Error("Must be an array");
+    }
+
+    // Each element --
+    var ids = {};
+    for ( var i = 0; i < arr.length; i++ ) {
+      var el = arr[i];
+
+      // Must be an object
+      if (!_.isObject(el)) {
+        throw new Error("Element " + i + " is not an object");
+      }
+
+      // Must have these props
+      _.each(['id', 'title', 'text'], function(field) {
+        if (!el.hasOwnProperty(field)) {
+          throw new Error("Element " + i + " doesn't have '" + field + "'");
+        }
+      })
+
+      // Must have *unique* id
+      if (ids[el.id]) {
+        throw new Error("ID " + el.id + " already used in element " + i);
+      }
+
+      ids[el.id] = true;
+    }
+
+    collection = arr;
+    flush();
+  };
+
   return new Storage();
 })();

@@ -87,6 +87,19 @@
     </select>
   </script>
 
+  <script id="listView" type="text/template">
+    <div class="codebar">
+      <span class="link edit">toggle edit</span>
+    </div>
+    <div class="boxen">
+    </div>
+    <div class="editor hide">
+      <textarea></textarea>
+      <button class="save">save</button> <small class="cancel">reset</small>
+      <span class="error hide"></span>
+    </div>
+  </script>
+
   <script id="pasteListView" type="text/template">
     <strong>
       <small><%= m.syntax() || "text" %></small>
