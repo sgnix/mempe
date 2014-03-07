@@ -10,6 +10,12 @@ var
   port = 8081,
   clients = {};
 
+function log() {
+  var now = new Date();
+  var message = util.format.apply(this, arguments);
+  console.log(now + ": " + message);
+}
+
 // Class 'Client': Creates a client based on a
 // websocket connection
 // ===========================================
@@ -35,6 +41,7 @@ var Client = function(connection) {
     self.send('register', {
       name: self.name
     });
+    log("Register client: %s", self.name);
   });
 
 
@@ -53,6 +60,7 @@ var Client = function(connection) {
           };
         }
         self.send('fetch', res);
+        log("'%s' fetched '%s/%s'", self.name, args.name, args.id);
       });
     } else {
       self.send('fetch', {
@@ -109,7 +117,7 @@ function Server() {
   });
 
   httpServer.listen(port, function() {
-    return console.log("The web socket server is listening on port " + port);
+    return log("The web socket server is listening on port " + port);
   });
 
   var socketServer = new WebSocketServer({
